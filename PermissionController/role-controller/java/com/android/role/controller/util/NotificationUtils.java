@@ -23,8 +23,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.os.Process;
-import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
@@ -33,8 +31,6 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import com.android.permissioncontroller.role.utils.UserUtils;
 
 /**
  * Utility methods about Notification permissions.
@@ -53,10 +49,7 @@ public final class NotificationUtils {
      */
     public static void grantNotificationAccessForPackage(@NonNull Context context,
             @NonNull String packageName) {
-	UserHandle user = Process.myUserHandle();
-	if (!UserUtils.isWorkProfile(user, context)) {
-            setNotificationGrantStateForPackage(context, packageName, true);
-	}
+        setNotificationGrantStateForPackage(context, packageName, true);
     }
 
     /**
@@ -67,10 +60,7 @@ public final class NotificationUtils {
      */
     public static void revokeNotificationAccessForPackage(@NonNull Context context,
             @NonNull String packageName) {
-	UserHandle user = Process.myUserHandle();
-	if (!UserUtils.isWorkProfile(user, context)) {
-            setNotificationGrantStateForPackage(context, packageName, false);
-	}
+        setNotificationGrantStateForPackage(context, packageName, false);
     }
 
 
