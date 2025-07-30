@@ -1044,7 +1044,6 @@ object KotlinUtils {
                 || (pkgInfo.packageName == PackageId.ANDROID_AUTO_NAME
                         && perm.name != Manifest.permission.RECORD_AUDIO)
                 || perm.name == POST_NOTIFICATIONS
-                || perm.name == Manifest.permission.OTHER_SENSORS
 
             if (!skipRestart) {
                 shouldKill = true
