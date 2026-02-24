@@ -193,13 +193,13 @@
         android:label="AppDataSharingUpdates"/>
 
     <fragment
-        android:id="@+id/android_auto_config"
-        android:name="com.android.permissioncontroller.ext.aauto.AndroidAutoConfigWrapperFragment"
-        android:label="AndroidAutoConfig"/>
+        android:id="@+id/storage_scopes"
+        android:name="com.android.permissioncontroller.sscopes.StorageScopesWrapperFragment"
+        android:label="StorageScopes"/>
 
     <fragment
-        android:id="@+id/gmscore_config"
-        android:name="com.android.permissioncontroller.ext.gmscore.GmsCoreConfigWrapperFragment"
-        android:label="GmsCoreConfig"/>
+        android:id="@+id/contact_scopes"
+        android:name="com.android.permissioncontroller.cscopes.ContactScopesWrapperFragment"
+        android:label="ContactScopes"/>
 
 </navigation>
