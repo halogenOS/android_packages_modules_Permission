@@ -35,6 +35,7 @@ import android.app.AppOpsManager.MODE_IGNORED
 import android.app.AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.app.AppOpsManager.permissionToOp
 import android.app.Application
+import android.app.compat.gms.GmsCompat
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_MAIN
@@ -54,6 +55,7 @@ import android.content.pm.PermissionGroupInfo
 import android.content.pm.PermissionInfo
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
+import android.ext.PackageId
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -1033,6 +1035,19 @@ object KotlinUtils {
                 newFlags,
                 user,
             )
+        }
+
+        if (GmsCompat.isEnabledFor(pkgInfo.packageName, user.identifier)) {
+            // in many cases, GMS components need a restart to properly handle permission grants
+            val skipRestart =
+                pkgInfo.packageName == PackageId.G_SEARCH_APP_NAME
+                || (pkgInfo.packageName == PackageId.ANDROID_AUTO_NAME
+                        && perm.name != Manifest.permission.RECORD_AUDIO)
+                || perm.name == POST_NOTIFICATIONS
+
+            if (!skipRestart) {
+                shouldKill = true
+            }
         }
 
         val newState = PermState(newFlags, isGranted)
